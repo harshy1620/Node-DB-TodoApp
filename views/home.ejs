@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/16fcd17eb5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./home.css">
+    <title>Todo-Home</title>
+</head>
+<body>
+ 
+    <main>
+        <!-- title and inputs of the todo app  -->
+        <h1  class="title">TODO App</h1>
+    <form action="/create-todo" method="POST">
+    <div class="box">
+        <label for="description">DESCRIPTION</label>
+          <input class="descrip" type="text" name="description" placeholder="What do you need to do?" required>
+         </input>
+    </div>
+
+    <div class="flex">
+        <div id="box-1">
+            <label for ="cars">CATEGORY</label>
+            <select  class="flex-item" name="category" id="category">
+                <option value="category">Choose a category</option>
+                <option value="personal">Personal</option>
+                <option value="work">Work</option>
+                <option value="school">School</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="others">Others</option>
+            </select>
+        </div>
+        <div id="box-2">
+            <label for ="date">DUE DATE</label>
+            <input class="flex-item" type="date" name="date" placeholder="dd/mm/yyyy" id="date" required></input>
+        </div>
+</div>
+
+<!-- code for add task button -->
+<div class="button-area">
+    <div class="button-div">
+       <button type="submit" class="btn-1"><i class="fa-solid fa-plus" style="color: #f7f7f7;" id="add"></i>  ADD TASKS</button>
+    </div>
+</div>
+ </form>
+ <!--Another form for todo items and delete button -->
+<form action="/delete-task" method="GET" >
+    <% for (let i of todoList) { %>
+    <div class="list-items">
+        <input type="checkbox" id="checkbox" name="<%= i._id %>" >
+        <div class="flex-box">
+            <div class="combine">
+                <label for="label"><%= i.description %></label>
+                  <div class="date">
+                      <i class="fa-solid fa-calendar-days" style="color: #a7a7a7;"></i> <p><%= i.due_date %></p>
+                 </div>
+            </div>
+    
+               <div class="category">
+                  <div><p><%= i.category %></p></div>
+              </div>
+        </div>
+     </div>
+      <% } %>
+      <!-- delete button code -->
+    <div class="delete-task">
+         <button type="submit" class="btn-2"> <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>  DELETE TASKS</button>
+    </div>
+</form>
+</main>
+</body>
+</html>
